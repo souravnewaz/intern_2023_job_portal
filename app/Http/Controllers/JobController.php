@@ -87,4 +87,21 @@ class JobController extends Controller
         
         return redirect()->back()->with('success', 'Application Successful');
     }
+
+    public function applications()
+    {
+        $user = auth()->user();
+
+        if($user->role == 'admin') {
+            
+            $applications = JobApplication::with('job.company', 'job.category')->paginate(10);
+        }
+
+        if($user->role == 'user') {
+
+            $applications = JobApplication::with('job.company', 'job.category')->where('user_id', $user->id)->paginate(10);
+        }
+
+        return view('jobs.applications', compact('applications'));
+    }
 }

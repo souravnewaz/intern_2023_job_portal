@@ -20,6 +20,8 @@ Route::middleware('auth')->group(function(){
     Route::get('/jobs/{job_id}/apply', [JobController::class, 'applicationForm'])->name('jobs.applicationForm');
     Route::post('/jobs/{job_id}/apply', [JobController::class, 'apply'])->name('jobs.apply');
 
+    Route::get('/jobs/applications', [JobController::class, 'applications'])->name('jobs.applications');
+
     Route::middleware('admin')->group(function(){
         Route::get('jobs/create', [JobController::class, 'create'])->name('jobs.create');
         Route::post('jobs/create', [JobController::class, 'store'])->name('jobs.store');
