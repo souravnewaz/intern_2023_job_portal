@@ -4,10 +4,10 @@
 
 <div class="row mt-3">
     <div class="col-12">
-        <form action="">
+        <form action="/jobs">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="type job title">
-                <button class="btn btn-primary" type="button">Search</button>
+                <input type="text" class="form-control" placeholder="type job title" name="title" required>
+                <button class="btn btn-primary" type="submit">Search</button>
             </div>
         </form>
     </div>

@@ -16,7 +16,30 @@ class JobController extends Controller
         $categories = Category::get();
         $companies = Company::get();
 
-        $jobs = Job::with('company')->paginate(10);
+        $title = request()->title;
+        $category_id = request()->category;
+        $company_id = request()->company;
+        $employment_type = request()->employment_type;
+
+        $jobs = Job::query();
+
+        if($title) {
+            $jobs->where('title', 'like', '%'.$title.'%');
+        }
+
+        if($category_id) {
+            $jobs->where('category_id', $category_id);
+        }
+
+        if($company_id) {
+            $jobs->where('company_id', $company_id);
+        }
+
+        if($employment_type) {
+            $jobs->where('employment_status', $employment_type);
+        }
+
+        $jobs = $jobs->paginate(10);
 
         return view('jobs.index', compact('categories', 'companies', 'jobs'));
     }
@@ -116,15 +139,13 @@ class JobController extends Controller
     {
         $user = auth()->user();
 
-        if($user->role == 'admin') {
-            
-            $applications = JobApplication::with('job.company', 'job.category')->paginate(10);
-        }
+        $applications = JobApplication::query();
 
         if($user->role == 'user') {
-
-            $applications = JobApplication::with('job.company', 'job.category')->where('user_id', $user->id)->paginate(10);
+            $applications->where('user_id', $user->id);
         }
+
+        $applications = $applications->with('job.company', 'job.category')->paginate(10);
 
         return view('jobs.applications', compact('applications'));
     }

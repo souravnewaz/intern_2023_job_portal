@@ -4,7 +4,13 @@
 <div class="row my-2">
     <div class="col-12 bg-white p-3 rounded">
         <form class="row g-3 ">
-            <div class="col-12 col-md-3">
+
+            <div class="col-12 col-md-4">
+                <label>Title</label>
+                <input type="text" class="form-control" placeholder="type job title" name="title" value="{{ request()->title }}">
+            </div>
+
+            <div class="col-12 col-md-2">
                 <label>Select Category</label>
                 <select class="form-select" name="category">
                     <option value="">All</option>
@@ -14,7 +20,7 @@
                 </select>
             </div>
 
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-3">
                 <label>Select Company</label>
                 <select class="form-select" name="company">
                     <option value="">All</option>
@@ -24,7 +30,7 @@
                 </select>
             </div>
 
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-2">
                 <label>Employment Type</label>
                 <select class="form-select" name="employment_type">
                     <option value="">All</option>
@@ -77,6 +83,12 @@
     <div class="text-center">
         {{ $jobs->links() }}
     </div>
+
+    @if($jobs->count() == 0)
+    <div class="alert alert-dark" role="alert">
+        Sorry, No jobs found!
+    </div>
+    @endif
 </div>
 
 @endsection
