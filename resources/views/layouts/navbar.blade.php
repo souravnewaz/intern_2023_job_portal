@@ -6,7 +6,7 @@
         @if(auth()->check())
         <div>
             @if(auth()->user()->role == 'admin')
-                <a href="" class="btn btn-primary btn-sm">Post Job</a>
+                <a href="{{ route('jobs.create') }}" class="btn btn-primary btn-sm">Post Job</a>
                 <a href="" class="btn btn-light btn-sm">Jobs</a>
             @endif
             <a href="" class="btn btn-light btn-sm">Applications</a>

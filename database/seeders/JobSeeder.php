@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
+use App\Models\Company;
 use App\Models\Job;
 use App\Models\JobDetail;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -49,8 +51,8 @@ class JobSeeder extends Seeder
 
         foreach($titles as $title) {
             $job = Job::create([
-                'category_id' => 1,
-                'company_id' => 1,
+                'category_id' => Category::inRandomOrder()->first()->id,
+                'company_id' => Company::inRandomOrder()->first()->id,
                 'title' => $title,
                 'location' => 'Dhaka, Bangladesh',
                 'vacancy' => rand(1, 9),
