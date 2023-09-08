@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
@@ -24,6 +25,7 @@ class RegisterController extends Controller
         ]);
 
         $input['role'] = 'user';
+        $input['password'] = Hash::make($request->password);
 
         $user = User::create($input);
 

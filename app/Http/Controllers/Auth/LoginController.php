@@ -30,11 +30,7 @@ class LoginController extends Controller
 
         Auth::login($user);
 
-        if($user->role == 'admin') {
-            return redirect('/');
-        }
-
-        return redirect('/tasks');
+        return redirect('/');
     }
 
     public function logout()
