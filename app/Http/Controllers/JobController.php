@@ -42,9 +42,33 @@ class JobController extends Controller
         return view('jobs.create', compact('companies', 'categories'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
+        $input = $request->validate([
+            'category_id' => 'required',
+            'company_id' => 'required',
+            'title' => 'required|string|min:4|max:100',
+            'location' => 'required|string|min:4|max:100',
+            'vacancy' => 'required|numeric|min:1',
+            'experience' => 'required|numeric|min:0',
+            'min_age' => 'required|numeric|min:10',
+            'max_age' => 'required|numeric|min:10',
+            'salary_starts' => 'required|numeric',
+            'salary_ends' => 'required|numeric',
+            'deadline' => 'required|date',
+            'employment_status' => 'required|string',
+        ]);
 
+        Job::create($input);
+
+        return redirect()->back()->with('success', 'Job posted successfully');
+    }
+
+    public function jobList()
+    {
+        $jobs = Job::with('category', 'company')->orderBy('id', 'DESC')->paginate(10);
+
+        return view('jobs.list', compact('jobs'));
     }
 
     public function applicationForm($job_id)

@@ -7,7 +7,7 @@
         <div>
             @if(auth()->user()->role == 'admin')
                 <a href="{{ route('jobs.create') }}" class="btn btn-primary btn-sm">Post Job</a>
-                <a href="" class="btn btn-light btn-sm">Jobs</a>
+                <a href="{{ route('jobs.list') }}" class="btn btn-light btn-sm">Jobs</a>
             @endif
             <a href="{{ route('jobs.applications') }}" class="btn btn-light btn-sm">Applications</a>
             <a href="{{ route('logout') }}" class="btn btn-light btn-sm">Logout</a>

@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function(){
     Route::middleware('admin')->group(function(){
         Route::get('jobs/create', [JobController::class, 'create'])->name('jobs.create');
         Route::post('jobs/create', [JobController::class, 'store'])->name('jobs.store');
+        Route::get('jobs/list', [JobController::class, 'jobList'])->name('jobs.list');
     });
 });
 
