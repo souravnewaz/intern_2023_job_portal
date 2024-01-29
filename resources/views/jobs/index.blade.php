@@ -69,8 +69,8 @@
                             <p class="text-secondary">{{ $employment_status }}</p>
                         </div>
                         <div class="col-sm-3 text-lg-end">
-                            @if(auth()->check())
-                            <a href="#" class="btn btn-success btn-sm">Apply</a>
+                            @if(auth()->check() && auth()->user()->role == 'user')
+                            <!-- <a href="#" class="btn btn-success btn-sm">Apply</a> -->
                             @endif
                             <a href="{{ route('jobs.show', $job->id) }}" class="btn btn-primary btn-sm">Details</a>
                         </div>

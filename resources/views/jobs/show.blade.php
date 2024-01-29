@@ -54,9 +54,8 @@
                         @endforeach
                     </ul>
                 </div>
-
-                @if(auth()->check())
-                    <a href="{{ route('jobs.applicationForm', $job->id) }}" class="btn btn-success btn-block">Apply Now</a>
+                @if(auth()->check() && auth()->user()->role == 'user')
+                    <a href="{{ route('jobs.applicationForm', $job->id) }}" class="btn btn-success btn-block">Apply 
                 @else
                     <h6 class="text-danger">Login to Apply</h6>
                 @endif
